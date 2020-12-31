@@ -1,7 +1,8 @@
-extends Area2D
+extends Node2D
 
 export var speed = 400  # How fast the player will move (pixels/sec).
 
+var played = false
 var screen_size  # Size of the game window.
 signal hit
 
@@ -20,27 +21,16 @@ func _process(delta):
 		velocity.y -= 1
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		$AnimatedSprite.play()
-	else:
-		$AnimatedSprite.stop()
 	position += velocity * delta
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
-	if velocity.x != 0:
-		$AnimatedSprite.animation = "run"
-		$AnimatedSprite.flip_v = false
-		# See the note below about boolean assignment
-		$AnimatedSprite.flip_h = velocity.x < 0
-		if (velocity.x > 0):
-			$AnimatedSprite.rotation = PI/2
-		else:
-			$AnimatedSprite.rotation = -PI/2
-	elif velocity.y != 0:
-		$AnimatedSprite.animation = "run"
-		$AnimatedSprite.flip_v = velocity.y > 0
-		$AnimatedSprite.rotation = 0
+	if !played:
+		$AnimationPlayer.play("Attack")
+		played = true
+	
 
 
-func _on_Player_body_entered(body):
+func _on_Unit_body_entered(body):
 	emit_signal("hit")
 	body.hide()
+	$AnimationPlayer.play_backwards("Attack")
