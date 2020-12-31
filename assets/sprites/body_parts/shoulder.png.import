@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/body.png-cf82373f3ccccc9382bb45d080b0e380.stex"
+path="res://.import/shoulder.png-ea3fc7dea774328b0a0f21ecb3b48431.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/body.png"
-dest_files=[ "res://.import/body.png-cf82373f3ccccc9382bb45d080b0e380.stex" ]
+source_file="res://assets/sprites/body_parts/shoulder.png"
+dest_files=[ "res://.import/shoulder.png-ea3fc7dea774328b0a0f21ecb3b48431.stex" ]
 
 [params]
 

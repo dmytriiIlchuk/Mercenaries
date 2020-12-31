@@ -1,7 +1,4 @@
 extends Node
-
-export (PackedScene) var Mob
-export (PackedScene) var Player
 export (PackedScene) var Swordsman
 
 func _ready():

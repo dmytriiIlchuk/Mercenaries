@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sword.png-f8ced047dc0dd90e280f6f00ec1ad5c9.stex"
+path="res://.import/hand.png-4d61eb4dc6ab5edff42444a6314fb389.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sword.png"
-dest_files=[ "res://.import/sword.png-f8ced047dc0dd90e280f6f00ec1ad5c9.stex" ]
+source_file="res://assets/sprites/body_parts/hand.png"
+dest_files=[ "res://.import/hand.png-4d61eb4dc6ab5edff42444a6314fb389.stex" ]
 
 [params]
 

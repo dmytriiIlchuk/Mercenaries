@@ -1,0 +1,154 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Units/Hand.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Units/Shield.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Units/Head.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Units/Sword.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Units/Shoulder.tscn" type="PackedScene" id=5]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Area2D
+
+export var speed = 400  # How fast the player will move (pixels/sec).
+
+var played = false
+var screen_size  # Size of the game window.
+signal hit
+
+func _ready():
+	screen_size = get_viewport_rect().size
+
+func _process(delta):
+	var velocity = Vector2()  # The player's movement vector.
+	if Input.is_action_pressed(\"ui_right\"):
+		velocity.x += 1
+	if Input.is_action_pressed(\"ui_left\"):
+		velocity.x -= 1
+	if Input.is_action_pressed(\"ui_down\"):
+		velocity.y += 1
+	if Input.is_action_pressed(\"ui_up\"):
+		velocity.y -= 1
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * speed
+	position += velocity * delta
+	position.x = clamp(position.x, 0, screen_size.x)
+	position.y = clamp(position.y, 0, screen_size.y)
+	if !played:
+		$AnimationPlayer.play(\"ShieldUp\")
+		played = true
+	
+
+
+func _on_Unit_body_entered(body):
+	emit_signal(\"hit\")
+	body.hide()
+	$AnimationPlayer.play_backwards(\"ShieldUp\")
+"
+
+[sub_resource type="Animation" id=2]
+tracks/0/type = "value"
+tracks/0/path = NodePath("HandRight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 40, -120 ), Vector2( 16, -136 ), Vector2( 40, -120 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HandRight:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -45.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+tracks/0/type = "value"
+tracks/0/path = NodePath("HandLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -37.4745, -122.806 ), Vector2( -5.6187, -140.032 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HandLeft:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HandRight:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 40, -120 ), Vector2( 43.7755, -86.7284 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HandRight:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+
+[node name="Unit" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="HandLeft" parent="." instance=ExtResource( 1 )]
+position = Vector2( -35.6907, -110.617 )
+scale = Vector2( 0.3, 0.3 )
+
+[node name="Shield" parent="HandLeft" instance=ExtResource( 2 )]
+position = Vector2( 9.82156, -64.0902 )
+scale = Vector2( 4, 4 )
+
+[node name="HandRight" parent="." instance=ExtResource( 1 )]
+position = Vector2( 40, -120 )
+scale = Vector2( 0.3, 0.3 )
+
+[node name="Sword" parent="HandRight" instance=ExtResource( 4 )]
+position = Vector2( 0, -80 )
+scale = Vector2( 3.33333, 3.33333 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Attack = SubResource( 2 )
+anims/ShieldUp = SubResource( 3 )
+
+[node name="Shoulder" parent="." instance=ExtResource( 5 )]
+position = Vector2( -24.3788, -89.1905 )
+
+[node name="Shoulder2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 22.8922, -89.1905 )
+
+[node name="Head" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0.594589, -88.2986 )
