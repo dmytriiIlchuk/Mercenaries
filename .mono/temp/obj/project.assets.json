@@ -1,0 +1,82 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.7.2": {
+      "Godot.NET.Sdk/3.2.4": {
+        "type": "package"
+      }
+    }
+  },
+  "libraries": {
+    "Godot.NET.Sdk/3.2.4": {
+      "sha512": "TafQXo/Fuws3XTeDaS39I3Ffq43OyTZT1ee3SGtFUcvGQWlLaVw2z0bZNKSTTStXXyzLpw8QnrmuL+Fo+vmJbg==",
+      "type": "package",
+      "path": "godot.net.sdk/3.2.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Sdk/Sdk.props",
+        "Sdk/Sdk.targets",
+        "godot.net.sdk.3.2.4.nupkg.sha512",
+        "godot.net.sdk.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.7.2": [
+      "Godot.NET.Sdk >= 3.2.4"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\dima6\\.nuget\\packages\\": {},
+    "D:\\Programs\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\Mercenaries.csproj",
+      "projectName": "Mercenaries",
+      "projectPath": "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\Mercenaries.csproj",
+      "packagesPath": "C:\\Users\\dima6\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\.mono\\temp\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "D:\\Programs\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\dima6\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net472"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net472": {
+        "targetAlias": "net472",
+        "dependencies": {
+          "Godot.NET.Sdk": {
+            "target": "Package",
+            "version": "[3.2.4, )"
+          }
+        },
+        "runtimeIdentifierGraphPath": "D:\\Programs\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

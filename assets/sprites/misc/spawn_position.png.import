@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sword.png-9fe72a6540b112bac151909dc332ed1e.stex"
+path="res://.import/spawn_position.png-e4d91426ac8c3f7a7c82f82f5cabec30.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/weapons/sword.png"
-dest_files=[ "res://.import/sword.png-9fe72a6540b112bac151909dc332ed1e.stex" ]
+source_file="res://assets/sprites/misc/spawn_position.png"
+dest_files=[ "res://.import/spawn_position.png-e4d91426ac8c3f7a7c82f82f5cabec30.stex" ]
 
 [params]
 

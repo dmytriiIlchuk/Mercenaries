@@ -1,0 +1,56 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\Mercenaries.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\Mercenaries.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\Mercenaries.csproj",
+        "projectName": "Mercenaries",
+        "projectPath": "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\Mercenaries.csproj",
+        "packagesPath": "C:\\Users\\dima6\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\.mono\\temp\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Programs\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\dima6\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "dependencies": {
+            "Godot.NET.Sdk": {
+              "target": "Package",
+              "version": "[3.2.4, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "D:\\Programs\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,9 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Units/Swordsman.gd" type="Script" id=1]
-[ext_resource path="res://Units/Shield.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Units/Sword.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Units/BaseUnit.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/swordsman.gd" type="Script" id=1]
+[ext_resource path="res://scenes/units/Shield.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/units/Sword.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/units/BaseUnit.tscn" type="PackedScene" id=4]
+
+
+
+
+
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack"
@@ -32,6 +38,34 @@ tracks/1/keys = {
 "values": [ 0.0, -45.0, 0.0 ]
 }
 
+[sub_resource type="Animation" id=2]
+resource_name = "ShieldUp"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("HandLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -38.4001, -23.3609 ), Vector2( -2.10791, -40.5717 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HandLeft:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+
 [node name="Swordsman" instance=ExtResource( 4 )]
 script = ExtResource( 1 )
 
@@ -39,9 +73,14 @@ script = ExtResource( 1 )
 position = Vector2( 0, -84.731 )
 scale = Vector2( 3.33, 3.33 )
 
+[node name="HandLeft" parent="." index="1"]
+position = Vector2( -38.4001, -23.3609 )
+
 [node name="Shield" parent="HandLeft" index="1" instance=ExtResource( 2 )]
 position = Vector2( 0, -57.3692 )
 scale = Vector2( 4, 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+playback_process_mode = 0
 anims/Attack = SubResource( 1 )
+anims/ShieldUp = SubResource( 2 )

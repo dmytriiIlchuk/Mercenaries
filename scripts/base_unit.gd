@@ -9,6 +9,10 @@ signal hit
 func _ready():
 	screen_size = get_viewport_rect().size
 
+func _input(event):
+	if event is InputEventMouseButton:
+		$AnimationPlayer.play("Attack")
+
 func _process(delta):
 	var velocity = Vector2()  # The player's movement vector.
 	if Input.is_action_pressed("ui_right"):
@@ -24,13 +28,3 @@ func _process(delta):
 	position += velocity * delta
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
-	if !played:
-		$AnimationPlayer.play("Attack")
-		played = true
-	
-
-
-func _on_Unit_body_entered(body):
-	emit_signal("hit")
-	body.hide()
-	$AnimationPlayer.play_backwards("Attack")

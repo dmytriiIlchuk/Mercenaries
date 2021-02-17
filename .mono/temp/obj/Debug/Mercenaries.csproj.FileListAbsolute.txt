@@ -1,0 +1,8 @@
+C:\USERS\DIMA6\ONEDRIVE\DOCUMENTS\MERCENARIES\.mono\temp\bin\Debug\Mercenaries.dll
+C:\USERS\DIMA6\ONEDRIVE\DOCUMENTS\MERCENARIES\.mono\temp\bin\Debug\Mercenaries.pdb
+C:\USERS\DIMA6\ONEDRIVE\DOCUMENTS\MERCENARIES\.mono\temp\obj\Debug\Mercenaries.csprojAssemblyReference.cache
+C:\USERS\DIMA6\ONEDRIVE\DOCUMENTS\MERCENARIES\.mono\temp\obj\Debug\Mercenaries.AssemblyInfoInputs.cache
+C:\USERS\DIMA6\ONEDRIVE\DOCUMENTS\MERCENARIES\.mono\temp\obj\Debug\Mercenaries.AssemblyInfo.cs
+C:\USERS\DIMA6\ONEDRIVE\DOCUMENTS\MERCENARIES\.mono\temp\obj\Debug\Mercenaries.csproj.CoreCompileInputs.cache
+C:\USERS\DIMA6\ONEDRIVE\DOCUMENTS\MERCENARIES\.mono\temp\obj\Debug\Mercenaries.dll
+C:\USERS\DIMA6\ONEDRIVE\DOCUMENTS\MERCENARIES\.mono\temp\obj\Debug\Mercenaries.pdb
