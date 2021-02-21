@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\Mercenaries.csproj": {}
+    "C:\\USERS\\DIMA6\\ONEDRIVE\\DOCUMENTS\\MERCENARIES\\Mercenaries.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\Mercenaries.csproj": {
+    "C:\\USERS\\DIMA6\\ONEDRIVE\\DOCUMENTS\\MERCENARIES\\Mercenaries.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\Mercenaries.csproj",
+        "projectUniqueName": "C:\\USERS\\DIMA6\\ONEDRIVE\\DOCUMENTS\\MERCENARIES\\Mercenaries.csproj",
         "projectName": "Mercenaries",
-        "projectPath": "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\Mercenaries.csproj",
+        "projectPath": "C:\\USERS\\DIMA6\\ONEDRIVE\\DOCUMENTS\\MERCENARIES\\Mercenaries.csproj",
         "packagesPath": "C:\\Users\\dima6\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\.mono\\temp\\obj\\",
+        "outputPath": "C:\\USERS\\DIMA6\\ONEDRIVE\\DOCUMENTS\\MERCENARIES\\.mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Programs\\dotnet\\sdk\\NuGetFallbackFolder"

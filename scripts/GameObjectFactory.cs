@@ -18,23 +18,21 @@ class GameObjectFactory
         Unit instance = (Unit)unitScene.Instance();
         instance.Scale = new Vector2(0.5f, 0.5f);
         instance.Position = position;
+        instance.AddToGroup("workers");
+        instance.tasks.Add(new UnitGatherResourceTask()))
         return instance;
     }
 
-    public static Node2D MakeResourceNode(Vector2 position)
+    public static Stone MakeResourceNode(Vector2 position)
     {
-        Node2D parent = new Node2D();
-        Sprite sprite = new Sprite();
-        ImageTexture imageTexture = new ImageTexture();
-        Image image = new Image();
-        image.Load("res://assets/sprites/buildings/stone.png");
-        imageTexture.CreateFromImage(new Image());
-        sprite.Texture = imageTexture;
-        parent.AddChild(sprite);
+        var unitScene = GD.Load<PackedScene>("res://scenes/boulder.tscn");
 
-        parent.Position = position;
+        Stone instance = (Stone)unitScene.Instance();
+        instance.Scale = new Vector2(0.1f, 0.1f);
 
-        return parent;
+        instance.Position = position;
+
+        return instance;
     }
 }
 

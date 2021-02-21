@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Godot.Collections;
 
 class UnitGatherResourceTask : Task<Unit>
 {
@@ -6,9 +7,10 @@ class UnitGatherResourceTask : Task<Unit>
     readonly MoveTask<Unit> moveToDropOffTask;
     bool hasResource = false;
 
-    public UnitGatherResourceTask(Node2D resource, Node2D dropOff)
+    public UnitGatherResourceTask(string resourceGroup, Node2D dropOff)
     {
-        this.moveToResourceTask = new MoveTask<Unit>(resource.Position);
+        Array resources = dropOff.GetTree().GetNodesInGroup(resourceGroup);
+        this.moveToResourceTask = new MoveTask<Unit>(((Node2D)resources[0]).Position);
         this.moveToDropOffTask = new MoveTask<Unit>(dropOff.Position);
     }
 
