@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stone.png-4f5460c05bd0119f2d4a8f57f003d4bd.stex"
+path="res://.import/city_center.png-ffe2067ffbd57b737f29ebc562e61514.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/Models/Buildings/Resources/Stone/Assets/stone.png"
-dest_files=[ "res://.import/stone.png-4f5460c05bd0119f2d4a8f57f003d4bd.stex" ]
+source_file="res://src/Models/Buildings/Constructions/CityCenter/Assets/city_center.png"
+dest_files=[ "res://.import/city_center.png-ffe2067ffbd57b737f29ebc562e61514.stex" ]
 
 [params]
 
