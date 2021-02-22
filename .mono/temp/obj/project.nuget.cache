@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gMF10RSCN2gtQDQsFMuwsSFfmeq28QR9gpqBCC1gufnDPw9QYvVa4lGL23SrSYGVROdY8dIwVmtRSITAMbGLzA==",
+  "dgSpecHash": "oWPc+vPWEEHJwiVVG0j68Qmm4Gfs0ZhEj8Z9ckguOhAqEipYzmwucQZNBOvORx/4JJNIBHEAO/1+Kd2QfIBTMw==",
   "success": true,
-  "projectFilePath": "C:\\USERS\\DIMA6\\ONEDRIVE\\DOCUMENTS\\MERCENARIES\\Mercenaries.csproj",
+  "projectFilePath": "C:\\Users\\dima6\\OneDrive\\Documents\\Mercenaries\\Mercenaries.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dima6\\.nuget\\packages\\godot.net.sdk\\3.2.4\\godot.net.sdk.3.2.4.nupkg.sha512"
   ],

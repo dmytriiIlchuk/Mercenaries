@@ -2,13 +2,15 @@
 
 class GameObjectFactory
 {
-    public static Unit MakeUnit()
+    public static void MakeUnit(Node2D parent, Vector2 position)
     {
         var unitScene = GD.Load<PackedScene>("res://scenes/unit.tscn");
 
         Unit instance = (Unit)unitScene.Instance();
-        instance.Transform.Scaled(new Vector2(0.5f, 0.5f));
-        return instance;
+        instance.Scale = new Vector2(0.5f, 0.5f);
+        instance.Position = position;
+
+        parent.AddChild(instance);
     }
 
     public static Unit MakeUnit(Vector2 position)
@@ -19,7 +21,6 @@ class GameObjectFactory
         instance.Scale = new Vector2(0.5f, 0.5f);
         instance.Position = position;
         instance.AddToGroup("workers");
-        instance.tasks.Add(new UnitGatherResourceTask()))
         return instance;
     }
 

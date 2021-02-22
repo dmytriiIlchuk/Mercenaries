@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spawn_position.png-e4d91426ac8c3f7a7c82f82f5cabec30.stex"
+path="res://.import/grass.png-eee8898dacedb7cb5072d6415a6ce2d7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/misc/spawn_position.png"
-dest_files=[ "res://.import/spawn_position.png-e4d91426ac8c3f7a7c82f82f5cabec30.stex" ]
+source_file="res://src/Models/Floors/Assets/grass.png"
+dest_files=[ "res://.import/grass.png-eee8898dacedb7cb5072d6415a6ce2d7.stex" ]
 
 [params]
 

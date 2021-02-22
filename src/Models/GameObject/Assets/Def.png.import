@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hand.png-4d61eb4dc6ab5edff42444a6314fb389.stex"
+path="res://.import/Def.png-5efaea4dfb82aa1bc3db9e6b17d8dc7f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/body_parts/hand.png"
-dest_files=[ "res://.import/hand.png-4d61eb4dc6ab5edff42444a6314fb389.stex" ]
+source_file="res://src/Models/GameObject/Assets/Def.png"
+dest_files=[ "res://.import/Def.png-5efaea4dfb82aa1bc3db9e6b17d8dc7f.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
