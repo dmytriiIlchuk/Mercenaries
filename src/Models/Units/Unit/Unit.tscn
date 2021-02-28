@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/sprites/weapons/pickaxe.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/misc/unit_body.png" type="Texture" id=2]
+[ext_resource path="res://src/Models/Units/Unit/Unit.cs" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[node name="Unit" type="Node2D"]
+[node name="Unit" type="Node2D" groups=[
+"Persist",
+]]
+script = ExtResource( 3 )
 
 [node name="Body" type="Area2D" parent="."]
 __meta__ = {

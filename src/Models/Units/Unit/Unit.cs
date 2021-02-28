@@ -15,7 +15,7 @@ public class Unit : Node2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        if (tasks[0].Execute(this, delta))
+        if (tasks.Count > 0 && tasks[0].Execute(this, delta))
         {
             tasks.RemoveAt(0);
         }
@@ -24,5 +24,18 @@ public class Unit : Node2D
     public Task<Unit> GetNextTask()
     {
         return (tasks.Count > 0) ? tasks[0] : null;
+    }
+
+    public Godot.Collections.Dictionary<string, object> Save()
+    {
+        return new Godot.Collections.Dictionary<string, object>()
+        {
+            { "Filename", this.Filename },
+            { "Parent", this.GetParent().GetPath() },
+            { "ScaleX", this.Scale.x },
+            { "ScaleY", this.Scale.y },
+            { "PosX", Position.x }, // Vector2 is not supported by JSON
+            { "PosY", Position.y },
+        };
     }
 }
