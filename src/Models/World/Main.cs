@@ -39,8 +39,8 @@ public class Main : Node
 
             GD.Print((float)nodeData["PosY"]);
 
-            newObject.Position = new Vector2((float)nodeData["PosX"], (float)nodeData["PosY"]);
-            newObject.Scale = new Vector2((float)nodeData["ScaleX"], (float)nodeData["ScaleY"]);
+            ((IPersistant)newObject).Load(nodeData);
+
             GetNode(nodeData["Parent"].ToString().Replace("Editor", "Main")).AddChild(newObject);
 
             // Now we set the remaining variables.

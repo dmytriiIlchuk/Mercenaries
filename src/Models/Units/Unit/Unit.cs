@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public class Unit : Node2D
+public class Unit : Node2D, IPersistant
 {
     // Declare member variables here. Examples:
     public int speed = 10;
@@ -37,5 +37,11 @@ public class Unit : Node2D
             { "PosX", Position.x }, // Vector2 is not supported by JSON
             { "PosY", Position.y },
         };
+    }
+
+    public void Load(Godot.Collections.Dictionary<string, object> config)
+    {
+        this.Position = new Vector2((float)config["PosX"], (float)config["PosY"]);
+        this.Scale = new Vector2((float)config["ScaleX"], (float)config["ScaleY"]);
     }
 }

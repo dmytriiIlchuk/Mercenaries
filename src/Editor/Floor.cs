@@ -1,6 +1,6 @@
 using Godot;
-using Godot.Collections;
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Floor : TileMap, IPersistant
 {
@@ -20,9 +20,9 @@ public class Floor : TileMap, IPersistant
         this.SetCellv(mapPosition, tile);
     }
 
-    public Dictionary<string, object> Save()
+    public Godot.Collections.Dictionary<string, object> Save()
     {
-        return new Dictionary<string, object>()
+        return new Godot.Collections.Dictionary<string, object>()
         {
             { "Filename", this.Filename },
             { "Parent", this.GetParent().GetPath() },
@@ -30,11 +30,23 @@ public class Floor : TileMap, IPersistant
             { "PosY", Position.y },
             { "ScaleX", this.Scale.x },
             { "ScaleY", this.Scale.y },
+            { "UsedCells", this.GetUsedCells() }
         };
     }
 
-    public void Load(Dictionary<string, object> config)
+    public void Load(Godot.Collections.Dictionary<string, object> config)
     {
-        throw new NotImplementedException();
+        this.Position = new Vector2((float)config["PosX"], (float)config["PosY"]);
+        this.Scale = new Vector2((float)config["ScaleX"], (float)config["ScaleY"]);
+
+        Godot.Collections.Array tiles = (Godot.Collections.Array)config["UsedCells"];
+
+        foreach (string tileStr in tiles)
+        {
+            IEnumerable<float> xy = tileStr.Trim('(', ')').Split(',').Select(value => float.Parse(value));
+            Vector2 tile = new Vector2(xy.ElementAt(0), xy.ElementAt(1));
+
+            this.SetCellv(tile, 1);
+        }
     }
 }
