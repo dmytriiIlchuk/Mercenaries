@@ -10,7 +10,7 @@ class SpawnUnitTask<T> : Task<T> where T : Node2D
         time += delta;
         if (time > timePeriod && amount > 0)
         {
-            performer.GetParent().AddChild(GameObjectFactory.MakeUnit(performer.Position));
+            performer.GetParent().AddChild(GameObjectFactory.MakeUnit(performer.Position, UnitType.Worker));
             time = 0;
             amount--;
         }

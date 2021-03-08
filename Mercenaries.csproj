@@ -5,4 +5,7 @@
   <ItemGroup>
     <PackageReference Include="Godot.NET.Sdk" Version="3.2.4" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\Utilities\" />
+  </ItemGroup>
 </Project>

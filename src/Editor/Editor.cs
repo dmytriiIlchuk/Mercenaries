@@ -26,8 +26,10 @@ public class Editor : Node2D
 
     public void LoadCreateUnitConfig()
     {
-        this.createUnitButton.AddItem("worker", 1);
-        this.createUnitButton.AddItem("swordsman", 2);
+        foreach (UnitType type in Enum.GetValues(typeof(UnitType)))
+        {
+            this.createUnitButton.AddItem(type.ToString(), (int)type);
+        }
     }
 
     public void LoadPutFloorConfig()
@@ -64,7 +66,32 @@ public class Editor : Node2D
 
     public void _on_CreateUnit_item_selected(int id)
     {
-        this.action = (Vector2 position) => GameObjectFactory.MakeUnit(world, position);
+        this.action = (Vector2 position) => {
+            Unit unit = GameObjectFactory.MakeUnit(world, position, (UnitType)id);
+            unit.Connect("UnitInput", this, nameof(OnUnitInput));
+        };
+    }
+
+    public void OnUnitInput(InputEvent @event, Unit unit)
+    {
+        if (@event is InputEventMouseButton eventMouseButton && action != null)
+        {
+            switch ((ButtonList)eventMouseButton.ButtonIndex)
+            {
+                case ButtonList.Right:
+                    unit.QueueFree();
+                    break;
+            }
+
+            if (dragging && !eventMouseButton.Pressed)
+            {
+                dragging = false;
+            }
+        }
+        if (@event is InputEventMouseMotion eventMouseMotion && action != null && dragging)
+        {
+            action(GetGlobalMousePosition());
+        }
     }
 
     public void _on_PutFloor_item_selected(int id)

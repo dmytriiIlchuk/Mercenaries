@@ -2,25 +2,36 @@
 
 class GameObjectFactory
 {
-    public static void MakeUnit(Node2D parent, Vector2 position)
+    public static Unit MakeUnit(Node2D parent, Vector2 position, UnitType unitType)
     {
-        var unitScene = GD.Load<PackedScene>(ResourcePath.Models.Units.UnitPath);
+        Unit unit = MakeUnit(position, unitType);
+        parent.AddChild(unit);
 
-        Unit instance = (Unit)unitScene.Instance();
-        instance.Scale = new Vector2(0.5f, 0.5f);
-        instance.Position = position;
-
-        parent.AddChild(instance);
+        return unit;
     }
 
-    public static Unit MakeUnit(Vector2 position)
+    public static Unit MakeUnit(Vector2 position, UnitType unitType)
     {
-        var unitScene = GD.Load<PackedScene>(ResourcePath.Models.Units.UnitPath);
+        var unitScene = GD.Load<PackedScene>(ResourcePath.Models.Units.UnitScenePath);
 
         Unit instance = (Unit)unitScene.Instance();
-        instance.Scale = new Vector2(0.5f, 0.5f);
         instance.Position = position;
-        instance.AddToGroup("workers");
+        switch (unitType)
+        {
+            case UnitType.Worker:
+                instance.SetUnitLabel(nameof(UnitType.Worker));
+                instance.AddToGroup("workers");
+                break;
+            case UnitType.Archer:
+                instance.SetUnitLabel(nameof(UnitType.Archer));
+                instance.AddToGroup("warriors");
+                break;
+            case UnitType.Swordsman:
+                instance.SetUnitLabel(nameof(UnitType.Swordsman));
+                instance.AddToGroup("warriors");
+                break;
+        }
+
         return instance;
     }
 

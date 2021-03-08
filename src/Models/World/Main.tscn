@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Models/World/Main.cs" type="Script" id=1]
 [ext_resource path="res://src/Models/World/World.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Models/World/World.cs" type="Script" id=3]
 [ext_resource path="res://src/UI/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/camera2d.gd" type="Script" id=8]
 
@@ -16,4 +17,4 @@ current = true
 script = ExtResource( 8 )
 
 [node name="World" parent="." instance=ExtResource( 2 )]
-script = ExtResource( 1 )
+script = ExtResource( 3 )

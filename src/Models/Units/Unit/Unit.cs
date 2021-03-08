@@ -6,6 +6,21 @@ public class Unit : Node2D, IPersistant
     // Declare member variables here. Examples:
     public int speed = 10;
     public IList<Task<Unit>> tasks = new List<Task<Unit>>();
+    private string unitLabel;
+
+    [Signal]
+    public delegate void UnitInput(InputEvent @event, Unit unit);
+
+    public string GetUnitLabel()
+    {
+        return this.unitLabel;
+    }
+
+    public void SetUnitLabel(string name)
+    {
+        this.unitLabel = name;
+        this.GetNode<Label>("Label").Text = this.unitLabel;
+    }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -21,9 +36,19 @@ public class Unit : Node2D, IPersistant
         }
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        EmitSignal(nameof(UnitInput), @event, this);
+    }
+
     public Task<Unit> GetNextTask()
     {
         return (tasks.Count > 0) ? tasks[0] : null;
+    }
+
+    public void AddTask(Task<Unit> task)
+    {
+        tasks.Add(task);
     }
 
     public Godot.Collections.Dictionary<string, object> Save()
@@ -36,6 +61,7 @@ public class Unit : Node2D, IPersistant
             { "ScaleY", this.Scale.y },
             { "PosX", Position.x }, // Vector2 is not supported by JSON
             { "PosY", Position.y },
+            { "Label", unitLabel }
         };
     }
 
@@ -43,5 +69,6 @@ public class Unit : Node2D, IPersistant
     {
         this.Position = new Vector2((float)config["PosX"], (float)config["PosY"]);
         this.Scale = new Vector2((float)config["ScaleX"], (float)config["ScaleY"]);
+        this.SetUnitLabel((string)config["Label"]);
     }
 }
