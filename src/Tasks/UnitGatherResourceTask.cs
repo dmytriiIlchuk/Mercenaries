@@ -14,7 +14,12 @@ class UnitGatherResourceTask : Task<Unit>
         this.moveToDropOffTask = new MoveTask<Unit>(dropOff.Position);
     }
 
-    public override bool Execute(Unit performer, float delta)
+    public override bool Achieved(Unit performer)
+    {
+        return false;
+    }
+
+    public override void Action(Unit performer, float delta)
     {
         if (hasResource)
         {
@@ -30,7 +35,5 @@ class UnitGatherResourceTask : Task<Unit>
                 hasResource = true;
             }
         }
-
-        return false;
     }
 }

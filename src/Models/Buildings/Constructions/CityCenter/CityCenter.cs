@@ -7,7 +7,7 @@ public class CityCenter : Area2D
 
     public override void _Ready()
     {
-        tasks.Add(new SpawnUnitTask<CityCenter>());
+        tasks.Add(new SpawnGameObjectTask<CityCenter>(3, GameObjectFactory.MakeUnit(this, Position, UnitType.Worker), 5));
     }
 
     public override void _Process(float delta)

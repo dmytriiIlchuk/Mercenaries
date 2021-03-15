@@ -5,6 +5,9 @@ public class Unit : Node2D, IPersistant
 {
     // Declare member variables here. Examples:
     public int speed = 10;
+    public int vitality = 10;
+    public int wounds = 0;
+
     public IList<Task<Unit>> tasks = new List<Task<Unit>>();
     private string unitLabel;
 
@@ -49,6 +52,23 @@ public class Unit : Node2D, IPersistant
     public void AddTask(Task<Unit> task)
     {
         tasks.Add(task);
+    }
+
+    public bool Hit()
+    {
+        this.wounds++;
+        if (this.wounds > this.vitality)
+        {
+            this.Die();
+            return true;
+        }
+
+        return false;
+    }
+
+    public void Die()
+    {
+        this.QueueFree();
     }
 
     public Godot.Collections.Dictionary<string, object> Save()

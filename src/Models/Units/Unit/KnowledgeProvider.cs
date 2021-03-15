@@ -1,3 +1,5 @@
-﻿public class KnowledgeProvider
+﻿using System.Collections.Generic;
+
+public class KnowledgeProvider
 {
 }

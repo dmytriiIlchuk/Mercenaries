@@ -3,9 +3,23 @@ using System.Collections.Generic;
 
 public class Main : Node
 {
+    private World world;
     public override void _Ready()
     {
-        LoadGame();
+        world = this.GetNode<World>("World");
+        // LoadGame();
+        SetupScene();
+    }
+
+    private void SetupScene()
+    {
+        float xLimit = 500;
+        float yLimit = 300;
+
+        Unit target = GameObjectFactory.MakeUnit(world, new Vector2(xLimit, yLimit), UnitType.Swordsman);
+
+        Unit unit = GameObjectFactory.MakeUnit(world, new Vector2(xLimit - 100, yLimit - 100), UnitType.Swordsman);
+        unit.AddTask(new AttackTask(target));
     }
 
     public void LoadGame()
