@@ -19,7 +19,7 @@ public class Main : Node
         Unit target = GameObjectFactory.MakeUnit(world, new Vector2(xLimit, yLimit), UnitType.Swordsman);
 
         Unit unit = GameObjectFactory.MakeUnit(world, new Vector2(xLimit - 100, yLimit - 100), UnitType.Swordsman);
-        unit.AddTask(new AttackTask(target));
+        unit.AddTask(ObjectiveProvider.AttackTargetObjective(target));
     }
 
     public void LoadGame()

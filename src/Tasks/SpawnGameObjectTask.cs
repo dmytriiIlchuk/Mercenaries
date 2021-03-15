@@ -13,15 +13,21 @@ public class SpawnGameObjectTask<T> : Task<T> where T : Node
         this.spawnTime = spawnTime;
         this.gameObject = gameObject;
     }
-    public override void Execute(T performer, float delta)
+
+    public override bool Achieved(T performer)
+    {
+        return spawnAmount == 0;
+    }
+
+    public override void Action(T performer, float delta)
     {
         time += delta;
-        if (time > spawnTime && spawnAmount > 0)
+        if (time > spawnTime)
         {
             performer.GetParent().AddChild(gameObject);
-            spawnAmount--;
             gameObject = gameObject.Duplicate();
             time = 0;
+            spawnAmount--;
         }
     }
 }

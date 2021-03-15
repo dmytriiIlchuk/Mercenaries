@@ -5,10 +5,11 @@ public class Unit : Node2D, IPersistant
 {
     // Declare member variables here. Examples:
     public int speed = 10;
-    public int vitality = 10;
-    public int wounds = 0;
+    public int vitality = 100;
+    public int attack = 10;
+    public ProgressBar healthBar;
 
-    public IList<Task<Unit>> tasks = new List<Task<Unit>>();
+    public IList<IExecutable<Unit>> tasks = new List<IExecutable<Unit>>();
     private string unitLabel;
 
     [Signal]
@@ -28,11 +29,14 @@ public class Unit : Node2D, IPersistant
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        this.healthBar = this.GetNode<ProgressBar>("HealthBar");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
+        this.healthBar.Value = vitality;
+
         if (tasks.Count > 0 && tasks[0].Execute(this, delta))
         {
             tasks.RemoveAt(0);
@@ -44,20 +48,20 @@ public class Unit : Node2D, IPersistant
         EmitSignal(nameof(UnitInput), @event, this);
     }
 
-    public Task<Unit> GetNextTask()
+    public IExecutable<Unit> GetNextTask()
     {
         return (tasks.Count > 0) ? tasks[0] : null;
     }
 
-    public void AddTask(Task<Unit> task)
+    public void AddTask(IExecutable<Unit> task)
     {
         tasks.Add(task);
     }
 
-    public bool Hit()
+    public bool Hit(int damage)
     {
-        this.wounds++;
-        if (this.wounds > this.vitality)
+        this.vitality -= damage;
+        if (this.vitality <= 0)
         {
             this.Die();
             return true;
