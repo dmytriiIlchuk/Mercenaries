@@ -1,14 +1,14 @@
 using Godot;
 using System.Collections.Generic;
 
-public class Unit : Node2D, IMoving, IPersistant
+public class Unit : Node2D, IMoving, IPersistant, IHittable, IAttacking
 {
     // Declare member variables here. Examples:
     public int vitality = 100;
     public int attack = 10;
     public ProgressBar healthBar;
     public ProgressBar statusBar;
-    private float _speed = 10.0f;
+    private float _speed = 50.0f;
     private string _unitLabel;
 
     public IList<IExecutable<Unit>> tasks = new List<IExecutable<Unit>>();
@@ -45,11 +45,6 @@ public class Unit : Node2D, IMoving, IPersistant
         }
     }
 
-    public override void _Input(InputEvent @event)
-    {
-        EmitSignal(nameof(UnitInput), @event, this);
-    }
-
     public IExecutable<Unit> GetNextTask()
     {
         return (tasks.Count > 0) ? tasks[0] : null;
@@ -58,6 +53,11 @@ public class Unit : Node2D, IMoving, IPersistant
     public void AddTask(IExecutable<Unit> task)
     {
         tasks.Add(task);
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        EmitSignal(nameof(UnitInput), @event, this);
     }
 
     public bool Hit(int damage)
@@ -101,5 +101,30 @@ public class Unit : Node2D, IMoving, IPersistant
     public float GetSpeed()
     {
         return this._speed;
+    }
+
+    public void MoveTo(Vector2 to, float delta)
+    {
+        this.Position = this.Position.MoveToward(to, delta * this._speed);
+    }
+
+    public bool At(Vector2 target, float distance)
+    {
+        return this.Position.DistanceSquaredTo(target) <= distance * distance;
+    }
+
+    public void Attack(IHittable target)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public bool Hit()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public bool IsDead()
+    {
+        throw new System.NotImplementedException();
     }
 }

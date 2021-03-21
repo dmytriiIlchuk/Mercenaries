@@ -36,6 +36,24 @@ class GameObjectFactory
         return instance;
     }
 
+    public static Formation MakeFormation(Node2D parent, Vector2 position)
+    {
+        Formation formation = MakeFormation(position);
+        parent.AddChild(formation);
+
+        return formation;
+    }
+
+    public static Formation MakeFormation(Vector2 position)
+    {
+        var formationScene = GD.Load<PackedScene>(ResourcePath.Models.Units.FormationScenePath);
+
+        Formation instance = (Formation)formationScene.Instance();
+        instance.Position = position;
+
+        return instance;
+    }
+
     public static Stone MakeResourceNode(Vector2 position)
     {
         var unitScene = GD.Load<PackedScene>(ResourcePath.Models.Buildings.StonePath);

@@ -25,6 +25,7 @@
         {
             public static string BasePath = $"{Models.BasePath}/Units";
             public static string UnitScenePath = $"{BasePath}/Unit/Unit.tscn";
+            public static string FormationScenePath = $"{BasePath}/Formations/Formation.tscn";
         }
 
         public class Buildings

@@ -1,21 +1,21 @@
 ﻿using Godot;
 
-public class HitTargetTask : DisplayedTimedTask<Unit>
+public class HitTargetTask<T>: DisplayedTimedTask<T> where T: IAttacking
 {
-    private Unit target;
+    private readonly IHittable target;
 
-    public HitTargetTask(Unit target, ProgressBar progressBar, float time) : base(progressBar, time)
+    public HitTargetTask(IHittable target, ProgressBar progressBar, float time) : base(progressBar, time)
     {
         this.target = target;
     }
 
-    public override bool Achieved(Unit performer)
+    public override bool Achieved(T performer)
     {
-        return target == null || target.vitality == 0;
+        return target == null || target.IsDead();
     }
 
-    public override void Action(Unit performer, float delta)
+    public override void Action(T performer, float delta)
     {
-        target.Hit(performer.attack);
+        performer.Attack(target);
     }
 }

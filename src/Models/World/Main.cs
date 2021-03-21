@@ -15,14 +15,19 @@ public class Main : Node
 
     private void SetupScene()
     {
-        float xLimit = 500;
-        float yLimit = 300;
-        Engine.TimeScale = 4.0f;
-        Unit target = GameObjectFactory.MakeUnit(world, new Vector2(xLimit, yLimit), UnitType.Swordsman, knowledgeBase);
-        Unit unit = GameObjectFactory.MakeUnit(world, new Vector2(xLimit - 100, yLimit - 100), UnitType.Swordsman, knowledgeBase);
-        knowledgeBase.Units.Add(target);
-        knowledgeBase.Units.Add(unit);
-        unit.AddTask(ObjectiveProvider.AttackTargetObjective(target, unit.statusBar, 3));
+        float xLimit = 50;
+        float yLimit = 50;
+        Engine.TimeScale = 1.0f;
+        Unit target = GameObjectFactory.MakeUnit(world, new Vector2(400, 400), UnitType.Swordsman, knowledgeBase);
+
+        Formation formation = GameObjectFactory.MakeFormation(world, new Vector2(xLimit, yLimit));
+        formation.tasks.Add(new MoveToTargetTask<Formation>(target));
+        //Unit target = GameObjectFactory.MakeUnit(world, new Vector2(xLimit, yLimit), UnitType.Swordsman, knowledgeBase);
+        //Unit unit = GameObjectFactory.MakeUnit(world, new Vector2(xLimit - 100, yLimit - 100), UnitType.Swordsman, knowledgeBase);
+        //knowledgeBase.Units.Add(target);
+        //knowledgeBase.Units.Add(unit);
+        //unit.AddTask(ObjectiveProvider.AttackTargetObjective(target, unit.statusBar, 3));
+        //target.AddTask(ObjectiveProvider.AttackTargetObjective(unit, target.statusBar, 3));
     }
 
     public void LoadGame()

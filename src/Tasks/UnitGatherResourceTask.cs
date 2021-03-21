@@ -3,15 +3,15 @@ using Godot.Collections;
 
 class UnitGatherResourceTask : Task<Unit>
 {
-    readonly MoveTask<Unit> moveToResourceTask;
-    readonly MoveTask<Unit> moveToDropOffTask;
+    readonly MoveToPointTask<Unit> moveToResourceTask;
+    readonly MoveToPointTask<Unit> moveToDropOffTask;
     bool hasResource = false;
 
     public UnitGatherResourceTask(string resourceGroup, Node2D dropOff)
     {
         Array resources = dropOff.GetTree().GetNodesInGroup(resourceGroup);
-        this.moveToResourceTask = new MoveTask<Unit>(((Node2D)resources[0]).Position);
-        this.moveToDropOffTask = new MoveTask<Unit>(dropOff.Position);
+        this.moveToResourceTask = new MoveToPointTask<Unit>(((Node2D)resources[0]).Position);
+        this.moveToDropOffTask = new MoveToPointTask<Unit>(dropOff.Position);
     }
 
     public override bool Achieved(Unit performer)

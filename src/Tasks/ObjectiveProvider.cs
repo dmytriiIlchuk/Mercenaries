@@ -2,10 +2,10 @@
 
 public class ObjectiveProvider
 {
-    public static IExecutable<Unit> AttackTargetObjective(Unit target, ProgressBar progressBar, float time) => new Objective<Unit>(new MoveTask<Unit>(target.Position), new HitTargetTask(target, progressBar, time));
+    public static IExecutable<T> AttackTargetObjective<T, T1>(T1 target, ProgressBar progressBar, float time) where T: Node2D, IMoving, IAttacking where T1: Node2D, IHittable => new Objective<T>(new MoveToTargetTask<T>(target), new HitTargetTask<T>(target, progressBar, time));
 
-    public static IExecutable<Unit> MoveToTargetObjective(Unit target)
+    public static IExecutable<T> MoveToTargetObjective<T>(Node2D target) where T: Node2D, IMoving
     {
-        return new MoveTask<Unit>(target.Position);
+        return new MoveToPointTask<T>(target.Position);
     }
 }
