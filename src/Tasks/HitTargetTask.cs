@@ -1,9 +1,10 @@
-﻿public class HitTargetTask : Task<Unit>
+﻿using Godot;
+
+public class HitTargetTask : DisplayedTimedTask<Unit>
 {
     private Unit target;
-    private float cooldown = 1;
-    private float status = 0;
-    public HitTargetTask(Unit target)
+
+    public HitTargetTask(Unit target, ProgressBar progressBar, float time) : base(progressBar, time)
     {
         this.target = target;
     }
@@ -15,14 +16,6 @@
 
     public override void Action(Unit performer, float delta)
     {
-        if (status > 0)
-        {
-            status -= delta;
-        }
-        else
-        {
-            status = cooldown;
-            target.Hit(performer.attack);
-        }
+        target.Hit(performer.attack);
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class Main : Node
 {
     private World world;
+    private KnowledgeBase knowledgeBase = new KnowledgeBase();
+
     public override void _Ready()
     {
         world = this.GetNode<World>("World");
@@ -15,11 +17,12 @@ public class Main : Node
     {
         float xLimit = 500;
         float yLimit = 300;
-
-        Unit target = GameObjectFactory.MakeUnit(world, new Vector2(xLimit, yLimit), UnitType.Swordsman);
-
-        Unit unit = GameObjectFactory.MakeUnit(world, new Vector2(xLimit - 100, yLimit - 100), UnitType.Swordsman);
-        unit.AddTask(ObjectiveProvider.AttackTargetObjective(target));
+        Engine.TimeScale = 4.0f;
+        Unit target = GameObjectFactory.MakeUnit(world, new Vector2(xLimit, yLimit), UnitType.Swordsman, knowledgeBase);
+        Unit unit = GameObjectFactory.MakeUnit(world, new Vector2(xLimit - 100, yLimit - 100), UnitType.Swordsman, knowledgeBase);
+        knowledgeBase.Units.Add(target);
+        knowledgeBase.Units.Add(unit);
+        unit.AddTask(ObjectiveProvider.AttackTargetObjective(target, unit.statusBar, 3));
     }
 
     public void LoadGame()

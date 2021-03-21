@@ -1,6 +1,6 @@
 public abstract class Task<T> : IExecutable<T>
 {
-    public bool Execute(T performer, float delta)
+    public virtual bool Execute(T performer, float delta)
     {
         if (!Achieved(performer))
         {

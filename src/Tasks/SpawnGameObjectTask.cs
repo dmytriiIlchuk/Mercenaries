@@ -1,16 +1,13 @@
 ﻿using Godot;
 
-public class SpawnGameObjectTask<T> : Task<T> where T : Node
+public class SpawnGameObjectTask<T> : TimedTask<T> where T : Node
 {
-    private float spawnTime;
-    private float time = 0;
     private Node gameObject;
     private int spawnAmount;
 
 
-    public SpawnGameObjectTask(float spawnTime, Node gameObject, int? spawnAmount = 1)
+    public SpawnGameObjectTask(float spawnTime, Node gameObject, int? spawnAmount = 1) : base(spawnTime)
     {
-        this.spawnTime = spawnTime;
         this.gameObject = gameObject;
     }
 
@@ -21,13 +18,8 @@ public class SpawnGameObjectTask<T> : Task<T> where T : Node
 
     public override void Action(T performer, float delta)
     {
-        time += delta;
-        if (time > spawnTime)
-        {
-            performer.GetParent().AddChild(gameObject);
-            gameObject = gameObject.Duplicate();
-            time = 0;
-            spawnAmount--;
-        }
+        performer.GetParent().AddChild(gameObject);
+        gameObject = gameObject.Duplicate();
+        spawnAmount--;
     }
 }

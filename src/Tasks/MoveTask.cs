@@ -1,6 +1,6 @@
 using Godot;
 
-public class MoveTask<T> : Task<T> where T : Unit
+public class MoveTask<T> : Task<T> where T : Node2D, IMoving
 {
     private Vector2 target;
     private float distance;
@@ -18,6 +18,6 @@ public class MoveTask<T> : Task<T> where T : Unit
 
     public override void Action(T performer, float delta)
     {
-        performer.Position = performer.Position.MoveToward(target, delta * performer.speed);
+        performer.Position = performer.Position.MoveToward(target, delta * performer.GetSpeed());
     }
 }

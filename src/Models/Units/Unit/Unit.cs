@@ -1,35 +1,37 @@
 using Godot;
 using System.Collections.Generic;
 
-public class Unit : Node2D, IPersistant
+public class Unit : Node2D, IMoving, IPersistant
 {
     // Declare member variables here. Examples:
-    public int speed = 10;
     public int vitality = 100;
     public int attack = 10;
     public ProgressBar healthBar;
+    public ProgressBar statusBar;
+    private float _speed = 10.0f;
+    private string _unitLabel;
 
     public IList<IExecutable<Unit>> tasks = new List<IExecutable<Unit>>();
-    private string unitLabel;
+    public string UnitLabel
+    {
+        get => this._unitLabel;
+        set
+        {
+            this._unitLabel = value;
+            this.GetNode<Label>("Label").Text = value;
+        }
+    }
+
+    public KnowledgeBase KnowledgeBase { get; set; }
 
     [Signal]
     public delegate void UnitInput(InputEvent @event, Unit unit);
-
-    public string GetUnitLabel()
-    {
-        return this.unitLabel;
-    }
-
-    public void SetUnitLabel(string name)
-    {
-        this.unitLabel = name;
-        this.GetNode<Label>("Label").Text = this.unitLabel;
-    }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         this.healthBar = this.GetNode<ProgressBar>("HealthBar");
+        this.statusBar = this.GetNode<ProgressBar>("StatusBar");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -85,7 +87,7 @@ public class Unit : Node2D, IPersistant
             { "ScaleY", this.Scale.y },
             { "PosX", Position.x }, // Vector2 is not supported by JSON
             { "PosY", Position.y },
-            { "Label", unitLabel }
+            { "Label", _unitLabel }
         };
     }
 
@@ -93,6 +95,11 @@ public class Unit : Node2D, IPersistant
     {
         this.Position = new Vector2((float)config["PosX"], (float)config["PosY"]);
         this.Scale = new Vector2((float)config["ScaleX"], (float)config["ScaleY"]);
-        this.SetUnitLabel((string)config["Label"]);
+        this.UnitLabel = (string)config["Label"];
+    }
+
+    public float GetSpeed()
+    {
+        return this._speed;
     }
 }
