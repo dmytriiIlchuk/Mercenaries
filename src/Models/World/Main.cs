@@ -18,10 +18,11 @@ public class Main : Node
         float xLimit = 50;
         float yLimit = 50;
         Engine.TimeScale = 1.0f;
-        Unit target = GameObjectFactory.MakeUnit(world, new Vector2(400, 400), UnitType.Swordsman, knowledgeBase);
 
         Formation formation = GameObjectFactory.MakeFormation(world, new Vector2(xLimit, yLimit));
-        formation.tasks.Add(new MoveToTargetTask<Formation>(target));
+
+        Formation formation1 = GameObjectFactory.MakeFormation(world, new Vector2(xLimit, yLimit+200));
+
         //Unit target = GameObjectFactory.MakeUnit(world, new Vector2(xLimit, yLimit), UnitType.Swordsman, knowledgeBase);
         //Unit unit = GameObjectFactory.MakeUnit(world, new Vector2(xLimit - 100, yLimit - 100), UnitType.Swordsman, knowledgeBase);
         //knowledgeBase.Units.Add(target);

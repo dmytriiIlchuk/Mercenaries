@@ -46,7 +46,7 @@ public class Formation : Node2D, IMoving, IAttacking
 
     private void BuildPositionMap()
     {
-        Vector2 currPosition = new Vector2(0.0f, 0.0f);
+        Vector2 currPosition = new Vector2(-positionOffset * (rowSize / 2), (-positionOffset / (rows / 2)));
 
         for (int row = 0; row < rows; row++)
         {
@@ -55,7 +55,7 @@ public class Formation : Node2D, IMoving, IAttacking
                 positionMap.Add(currPosition);
                 currPosition.x += positionOffset;
             }
-            currPosition.x = 0.0f;
+            currPosition.x = -positionOffset * (rowSize / 2);
             currPosition.y += positionOffset;
         }
     }
