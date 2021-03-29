@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class Formation : Node2D, IMoving, IAttacking
+public class Formation : Node2D, IMoving, IAttacking, IHittable
 {
     private IList<Unit> units = new List<Unit>();
     private IList<Vector2> positionMap = new List<Vector2>();
@@ -70,6 +70,29 @@ public class Formation : Node2D, IMoving, IAttacking
 
     public void Attack(IHittable target)
     {
+        if (target is Formation)
+        {
+            Formation formation = (Formation)target;
+            foreach (Unit unit in units)
+            {
+                Unit targetUnit = formation.units.OrderBy(tUnit => tUnit.Position.DistanceSquaredTo(unit.Position)).First();
+                unit.AddTask(ObjectiveProvider.AttackTargetObjective<Unit, Unit> (targetUnit, unit.statusBar, 2));
+            }
+        }
+
+        if (target is Unit)
+        {
+
+        }
+    }
+
+    public bool Hit(int damage)
+    {
         throw new System.NotImplementedException();
+    }
+
+    public bool IsDead()
+    {
+        return units.All(unit => unit == null || unit.IsDead());
     }
 }

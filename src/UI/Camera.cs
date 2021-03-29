@@ -2,7 +2,7 @@
 
 public class Camera : Camera2D
 {
-    public float PanSpeed = 10.0f;
+    public float PanSpeed = 30.0f;
     public float Speed = 30.0f;
     public float ZoomMargin = 0.1f;
     public float ZoomSpeed = 20.0f;

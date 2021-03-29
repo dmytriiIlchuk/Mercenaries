@@ -60,18 +60,6 @@ public class Unit : Node2D, IMoving, IPersistant, IHittable, IAttacking
         EmitSignal(nameof(UnitInput), @event, this);
     }
 
-    public bool Hit(int damage)
-    {
-        this.vitality -= damage;
-        if (this.vitality <= 0)
-        {
-            this.Die();
-            return true;
-        }
-
-        return false;
-    }
-
     public void Die()
     {
         this.QueueFree();
@@ -115,12 +103,19 @@ public class Unit : Node2D, IMoving, IPersistant, IHittable, IAttacking
 
     public void Attack(IHittable target)
     {
-        throw new System.NotImplementedException();
+        target.Hit(this.attack);
     }
 
-    public bool Hit()
+    public bool Hit(int damage)
     {
-        throw new System.NotImplementedException();
+        this.vitality -= damage;
+        if (this.vitality <= 0)
+        {
+            this.Die();
+            return true;
+        }
+
+        return false;
     }
 
     public bool IsDead()

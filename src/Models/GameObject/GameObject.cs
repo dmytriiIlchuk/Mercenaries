@@ -1,8 +1,3 @@
-using Godot;
-
-namespace Mercenaries.scenes.Models
+public class GameObject
 {
-    class GameObject : Node2D
-    {
-    }
 }

@@ -6,4 +6,3 @@ interface IPersistant
 
     void Load(Dictionary<string, object> config);
 }
-

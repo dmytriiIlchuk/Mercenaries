@@ -23,6 +23,7 @@ public class Main : Node
 
         Formation formation1 = GameObjectFactory.MakeFormation(world, new Vector2(xLimit, yLimit+200));
 
+        formation.tasks.Add(ObjectiveProvider.AttackTargetObjective<Formation, Formation>(formation1, null, 3));
         //Unit target = GameObjectFactory.MakeUnit(world, new Vector2(xLimit, yLimit), UnitType.Swordsman, knowledgeBase);
         //Unit unit = GameObjectFactory.MakeUnit(world, new Vector2(xLimit - 100, yLimit - 100), UnitType.Swordsman, knowledgeBase);
         //knowledgeBase.Units.Add(target);

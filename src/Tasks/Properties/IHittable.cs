@@ -1,6 +1,6 @@
 ﻿public interface IHittable
 {
-    bool Hit();
+    bool Hit(int damage);
 
     bool IsDead();
 }

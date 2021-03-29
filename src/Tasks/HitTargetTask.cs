@@ -1,10 +1,10 @@
 ﻿using Godot;
 
-public class HitTargetTask<T>: DisplayedTimedTask<T> where T: IAttacking
+public class HitTargetTask<T>: TimedTask<T> where T: IAttacking
 {
     private readonly IHittable target;
 
-    public HitTargetTask(IHittable target, ProgressBar progressBar, float time) : base(progressBar, time)
+    public HitTargetTask(IHittable target, float time) : base(time)
     {
         this.target = target;
     }

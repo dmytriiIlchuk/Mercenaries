@@ -1,7 +1,7 @@
 ﻿public abstract class TimedTask<T> : Task<T>
 {
     protected float currentTime;
-    protected float time;
+    public float time { get; protected set; }
 
     public TimedTask(float time)
     {
