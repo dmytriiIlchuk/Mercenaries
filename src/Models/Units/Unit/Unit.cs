@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public class Unit : Node2D, IMoving, IPersistant, IHittable, IAttacking
+public class Unit : Node2D, IMoving, IPersistant, IHittable, IAttacking, ISelectable
 {
     // Declare member variables here. Examples:
     public int vitality = 100;
@@ -23,9 +23,6 @@ public class Unit : Node2D, IMoving, IPersistant, IHittable, IAttacking
     }
 
     public KnowledgeBase KnowledgeBase { get; set; }
-
-    [Signal]
-    public delegate void UnitInput(InputEvent @event, Unit unit);
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -57,7 +54,15 @@ public class Unit : Node2D, IMoving, IPersistant, IHittable, IAttacking
 
     public override void _Input(InputEvent @event)
     {
-        EmitSignal(nameof(UnitInput), @event, this);
+        if (@event is InputEventMouseButton)
+        {
+            InputEventMouseButton inputEventMouseButton = (InputEventMouseButton)@event;
+
+            if (inputEventMouseButton.ButtonIndex == (int)ButtonList.Left)
+            {
+                this.Select();
+            }
+        }
     }
 
     public void Die()
@@ -120,6 +125,18 @@ public class Unit : Node2D, IMoving, IPersistant, IHittable, IAttacking
 
     public bool IsDead()
     {
-        throw new System.NotImplementedException();
+        return vitality <= 0;
+    }
+
+    public void Select()
+    {
+        this.AddToGroup("selected");
+        this.Modulate = Color.Color8(255, 0, 0);
+    }
+
+    public void Deselect()
+    {
+        this.RemoveFromGroup("selected");
+        this.Modulate = Color.Color8(255, 255, 255);
     }
 }
