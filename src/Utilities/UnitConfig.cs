@@ -3,7 +3,8 @@ public class UnitConfig: GameObjectConfig
 {
     public static UnitConfig Default = new UnitConfig()
     {
-        Attack = 10.0f
+        Attack = 10.0f,
+        HealthPointsMax= 100.0f,
     };
 
     /// <summary>
