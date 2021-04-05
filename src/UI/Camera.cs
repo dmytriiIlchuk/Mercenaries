@@ -2,26 +2,28 @@
 
 public class Camera : Camera2D
 {
-    public float PanSpeed = 30.0f;
-    public float Speed = 30.0f;
-    public float ZoomMargin = 0.1f;
-    public float ZoomSpeed = 20.0f;
-    public float ZoomMin = 0.25f;
-    public float ZoomMax = 3.0f;
-    public float ZoomFactor = 1.0f;
-    public float MarginX = 200.0f;
-    public float MarginY = 100.0f;
-    public bool Zooming = false;
-    public bool IsDragging = false;
+    private static CameraConfig cameraConfig = Config.cameraConfig;
+    private float PanSpeed = cameraConfig.PanSpeed;
+    private float Speed = cameraConfig.Speed;
+    private float ZoomMargin = cameraConfig.ZoomMargin;
+    private float ZoomSpeed = cameraConfig.ZoomSpeed;
+    private float ZoomMin = cameraConfig.ZoomMin;
+    private float ZoomMax = cameraConfig.ZoomMax;
+    private float MarginX = cameraConfig.MarginX;
+    private float MarginY = cameraConfig.MarginY;
 
-    public Vector2 MousePosition = new Vector2();
-    public Vector2 MousePositionGlobal = new Vector2();
-    public Vector2 Start = new Vector2();
-    public Vector2 End = new Vector2();
-    public Vector2 StartV = new Vector2();
-    public Vector2 EndV = new Vector2();
-    public Vector2 ZoomPos = new Vector2();
-    public Vector2 MoveToPoint = new Vector2();
+    private float ZoomFactor = 1.0f;
+    private bool Zooming = false;
+    private bool IsDragging = false;
+
+    private Vector2 MousePosition = new Vector2();
+    private Vector2 MousePositionGlobal = new Vector2();
+    private Vector2 Start = new Vector2();
+    private Vector2 End = new Vector2();
+    private Vector2 StartV = new Vector2();
+    private Vector2 EndV = new Vector2();
+    private Vector2 ZoomPos = new Vector2();
+    private Vector2 MoveToPoint = new Vector2();
 
     public override void _Ready()
     {

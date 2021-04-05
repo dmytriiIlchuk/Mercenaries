@@ -1,4 +1,4 @@
-﻿enum UnitType
+﻿public enum UnitType
 {
     Worker,
     Swordsman,

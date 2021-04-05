@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public class Unit : Node2D, IMoving, IPersistant, IHittable, IAttacking, ISelectable
+public class Unit : GameObject, IMoving, IPersistant, IHittable, IAttacking, ISelectable
 {
     // Declare member variables here. Examples:
     public int vitality = 100;

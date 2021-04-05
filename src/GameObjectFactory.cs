@@ -1,23 +1,39 @@
 ﻿using Godot;
+using System;
 
 class GameObjectFactory
 {
-    public static Unit MakeUnit(Node2D parent, Vector2 position, UnitType unitType, KnowledgeBase knowledgeBase)
+    public static GameObject MakeObject(Node2D parent, Vector2 position, GameObjectConfig config)
     {
-        Unit unit = MakeUnit(position, unitType, knowledgeBase);
-        parent.AddChild(unit);
+        GameObject instance = MakeObject(position, config);
 
-        return unit;
+        parent.AddChild(instance);
+
+        return instance;
     }
 
-    public static Unit MakeUnit(Vector2 position, UnitType unitType, KnowledgeBase knowledgeBase)
+    public static GameObject MakeObject(Vector2 position, GameObjectConfig config)
+    {
+        GameObject instance;
+        switch (config.ObjectType)
+        {
+            case GameObjectType.Unit:
+                instance = GameObjectFactory.MakeUnit(position, (UnitConfig)config);
+                break;
+            default:
+                throw new NotImplementedException();
+        }
+
+        return instance;
+    }
+
+    public static Unit MakeUnit(Vector2 position, UnitConfig config)
     {
         var unitScene = GD.Load<PackedScene>(ResourcePath.Models.Units.UnitScenePath);
 
         Unit instance = (Unit)unitScene.Instance();
         instance.Position = position;
-        instance.KnowledgeBase = knowledgeBase;
-        switch (unitType)
+        switch (config.unitType)
         {
             case UnitType.Worker:
                 instance.UnitLabel = nameof(UnitType.Worker);

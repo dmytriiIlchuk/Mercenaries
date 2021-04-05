@@ -1,3 +1,5 @@
-public class GameObject
+using Godot;
+
+public class GameObject: Node2D
 {
 }
