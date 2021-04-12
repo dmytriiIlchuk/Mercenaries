@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class Formation : Node2D, IMoving, IAttacking, IHittable
+public class Formation : GameObject, IMoving, IAttacking, IHittable
 {
     private IList<Unit> units = new List<Unit>();
-    private IList<Vector2> positionMap = new List<Vector2>();
+    public IList<Vector2> positionMap = new List<Vector2>();
     private int rowSize = 10;
     private int rows = 2;
     private float positionOffset = 96.0f;
-    private UnitType unitType = UnitType.Swordsman;
-
+    
+    public UnitConfig UnitConfig;
     public IList<IExecutable<Formation>> tasks = new List<IExecutable<Formation>>();
 
     public bool At(Vector2 target, float distance)
@@ -64,7 +64,7 @@ public class Formation : Node2D, IMoving, IAttacking, IHittable
     {
         foreach (Vector2 position in positionMap)
         {
-            units.Add(GameObjectFactory.MakeUnit(this, position + this.Position, unitType, null));
+            units.Add((Unit)GameObjectFactory.MakeObject(this, position + this.Position, this.UnitConfig));
         }
     }
 

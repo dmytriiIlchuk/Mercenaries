@@ -3,4 +3,6 @@
     void Select();
 
     void Deselect();
+
+    bool IsSelected();
 }

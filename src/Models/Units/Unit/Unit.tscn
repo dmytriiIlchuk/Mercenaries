@@ -24,7 +24,12 @@ font_data = ExtResource( 1 )
 ]]
 script = ExtResource( 3 )
 
+[node name="Icon" type="Sprite" parent="."]
+position = Vector2( 1.13687e-13, 1.13687e-13 )
+scale = Vector2( 0.6875, 0.6875 )
+
 [node name="Body" type="KinematicBody2D" parent="."]
+input_pickable = true
 
 [node name="Shape" type="CollisionShape2D" parent="Body"]
 shape = SubResource( 1 )
@@ -32,15 +37,12 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="Body"]
 texture = ExtResource( 2 )
 
-[node name="Icon" type="Sprite" parent="."]
-position = Vector2( 1.13687e-13, 1.13687e-13 )
-scale = Vector2( 0.6875, 0.6875 )
-
 [node name="HealthBar" type="ProgressBar" parent="."]
 margin_left = -24.0
 margin_top = -24.0
 margin_right = 24.0
 margin_bottom = -10.0
+mouse_filter = 2
 custom_styles/fg = SubResource( 2 )
 custom_styles/bg = SubResource( 3 )
 step = 1.0
@@ -56,6 +58,7 @@ margin_left = -24.0
 margin_top = 16.0
 margin_right = 24.0
 margin_bottom = 22.0
+mouse_filter = 2
 custom_styles/fg = SubResource( 4 )
 custom_styles/bg = SubResource( 3 )
 value = 10.0

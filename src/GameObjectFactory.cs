@@ -18,7 +18,10 @@ class GameObjectFactory
         switch (config.ObjectType)
         {
             case GameObjectType.Unit:
-                instance = GameObjectFactory.MakeUnit(position, (UnitConfig)config);
+                instance = MakeUnit(position, (UnitConfig)config);
+                break;
+            case GameObjectType.Formation:
+                instance = MakeFormation(position, (UnitConfig)config);
                 break;
             default:
                 throw new NotImplementedException();
@@ -52,20 +55,13 @@ class GameObjectFactory
         return instance;
     }
 
-    public static Formation MakeFormation(Node2D parent, Vector2 position)
-    {
-        Formation formation = MakeFormation(position);
-        parent.AddChild(formation);
-
-        return formation;
-    }
-
-    public static Formation MakeFormation(Vector2 position)
+    public static Formation MakeFormation(Vector2 position, UnitConfig unitConfig)
     {
         var formationScene = GD.Load<PackedScene>(ResourcePath.Models.Units.FormationScenePath);
 
         Formation instance = (Formation)formationScene.Instance();
         instance.Position = position;
+        instance.UnitConfig = unitConfig;
 
         return instance;
     }
