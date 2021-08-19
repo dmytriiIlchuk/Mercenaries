@@ -64,7 +64,7 @@ public class Formation : GameObject, IMoving, IAttacking, IHittable
     {
         foreach (Vector2 position in positionMap)
         {
-            units.Add((Unit)GameObjectFactory.MakeObject(this, position + this.Position, this.UnitConfig));
+            units.Add((Unit)GameObjectFactory.MakeObject(this.UnitConfig, this, position + this.Position));
         }
     }
 
@@ -76,7 +76,7 @@ public class Formation : GameObject, IMoving, IAttacking, IHittable
             foreach (Unit unit in units)
             {
                 Unit targetUnit = formation.units.OrderBy(tUnit => tUnit.Position.DistanceSquaredTo(unit.Position)).First();
-                unit.AddTask(ObjectiveProvider.AttackTargetObjective<Unit, Unit> (targetUnit, unit.statusBar, 2));
+                unit.AddTask(ObjectiveProvider.AttackTargetObjective<Unit, Unit> (targetUnit, 2));
             }
         }
 
@@ -94,5 +94,10 @@ public class Formation : GameObject, IMoving, IAttacking, IHittable
     public bool IsDead()
     {
         return units.All(unit => unit == null || unit.IsDead());
+    }
+
+    public override void Initialize(GameObjectConfig gameObjectConfig)
+    {
+        throw new System.NotImplementedException();
     }
 }

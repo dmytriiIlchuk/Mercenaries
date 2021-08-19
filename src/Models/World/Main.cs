@@ -9,29 +9,13 @@ public class Main : Node
     public override void _Ready()
     {
         world = this.GetNode<World>("World");
-        // LoadGame();
+        LoadGame();
         SetupScene();
     }
 
     private void SetupScene()
     {
-        float xLimit = 50;
-        float yLimit = 50;
-        Engine.TimeScale = 1.0f;
-
-        Formation formation = (Formation)GameObjectFactory.MakeObject(world, new Vector2(xLimit, yLimit)() {
-            ObjectType = GameObjectType.Formation,
-        });
-
-        Formation formation1 = GameObjectFactory.MakeObject(world, new Vector2(xLimit, yLimit+200));
-
-        formation.tasks.Add(ObjectiveProvider.AttackTargetObjective<Formation, Formation>(formation1, null, 3));
-        //Unit target = GameObjectFactory.MakeUnit(world, new Vector2(xLimit, yLimit), UnitType.Swordsman, knowledgeBase);
-        //Unit unit = GameObjectFactory.MakeUnit(world, new Vector2(xLimit - 100, yLimit - 100), UnitType.Swordsman, knowledgeBase);
-        //knowledgeBase.Units.Add(target);
-        //knowledgeBase.Units.Add(unit);
-        //unit.AddTask(ObjectiveProvider.AttackTargetObjective(target, unit.statusBar, 3));
-        //target.AddTask(ObjectiveProvider.AttackTargetObjective(unit, target.statusBar, 3));
+        Engine.TimeScale = 0.5f;
     }
 
     public void LoadGame()

@@ -14,4 +14,21 @@ text = "Back to menu"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CommandBar" type="PanelContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuildMenu" type="MenuButton" parent="CommandBar"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 49.0
+text = "Buildings"
+items = [ "CityCenter", null, 0, false, false, 0, 0, null, "", false ]
 [connection signal="button_up" from="Button" to="." method="BackToMenu"]

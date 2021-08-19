@@ -7,18 +7,21 @@ public class Unit : GameObject, IMoving, IPersistant, IHittable, IAttacking, ISe
     public int vitality = 100;
     public int attack = 10;
     public ProgressBar healthBar;
-    public ProgressBar statusBar;
+    public ProgressBar progressBar;
     private float _speed = 50.0f;
-    private string _unitLabel;
+    private string _label;
     private CollisionObject2D body;
 
+    [Signal]
+    public delegate void ConstructBuildingSignal(BuildingType building);
+
     public IList<IExecutable<Unit>> tasks = new List<IExecutable<Unit>>();
-    public string UnitLabel
+    public string Label
     {
-        get => this._unitLabel;
+        get => this._label;
         set
         {
-            this._unitLabel = value;
+            this._label = value;
             this.GetNode<Label>("Label").Text = value;
         }
     }
@@ -29,10 +32,15 @@ public class Unit : GameObject, IMoving, IPersistant, IHittable, IAttacking, ISe
     public override void _Ready()
     {
         this.healthBar = this.GetNode<ProgressBar>("HealthBar");
-        this.statusBar = this.GetNode<ProgressBar>("StatusBar");
+        this.progressBar = this.GetNode<ProgressBar>("ProgressBar");
         this.body = this.GetNode<CollisionObject2D>("Body");
         string name = nameof(OnInput);
         this.body.Connect("input_event", this, name);
+    }
+
+    public void onConstructBuildingSignal(Building building)
+    {
+        this.AddTask(ObjectiveProvider.ConstructBuildingObjective<Unit>(building));
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -91,7 +99,7 @@ public class Unit : GameObject, IMoving, IPersistant, IHittable, IAttacking, ISe
             { "ScaleY", this.Scale.y },
             { "PosX", Position.x }, // Vector2 is not supported by JSON
             { "PosY", Position.y },
-            { "Label", _unitLabel }
+            { "Label", _label }
         };
     }
 
@@ -99,7 +107,8 @@ public class Unit : GameObject, IMoving, IPersistant, IHittable, IAttacking, ISe
     {
         this.Position = new Vector2((float)config["PosX"], (float)config["PosY"]);
         this.Scale = new Vector2((float)config["ScaleX"], (float)config["ScaleY"]);
-        this.UnitLabel = (string)config["Label"];
+        this.Label = (string)config["Label"];
+        this.Initialize(UnitConfig.Default);
     }
 
     public float GetSpeed()
@@ -154,5 +163,15 @@ public class Unit : GameObject, IMoving, IPersistant, IHittable, IAttacking, ISe
     public bool IsSelected()
     {
         return this.IsInGroup(Groups.Selected);
+    }
+
+    public override void Initialize(GameObjectConfig gameObjectConfig)
+    {
+        UnitConfig config = (UnitConfig)gameObjectConfig;
+        this._label = config.Name;
+        foreach (string group in config.Groups)
+        {
+            this.AddToGroup(group);
+        }
     }
 }

@@ -1,6 +1,4 @@
-﻿using Godot;
-
-public class HitTargetTask<T>: TimedTask<T> where T: IAttacking
+﻿public class HitTargetTask<T>: TimedTask<T> where T: IAttacking
 {
     private readonly IHittable target;
 

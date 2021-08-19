@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-public class Objective<T> : IExecutable<T>
+public class Objective<T> : Task<T>
 {
     protected IList<Task<T>> tasks;
 
@@ -10,9 +10,15 @@ public class Objective<T> : IExecutable<T>
         this.tasks = tasks.ToList();
     }
 
-    public bool Execute(T performer, float delta)
+    public override bool Achieved(T performer)
+    {
+        return tasks.Last().Achieved(performer);
+    }
+
+    public override void Action(T performer, float delta)
     {
         Task<T> currentTask = tasks.FirstOrDefault(task => !task.Achieved(performer));
-        return currentTask == null || currentTask.Execute(performer, delta);
+
+        currentTask?.Action(performer, delta);
     }
 }

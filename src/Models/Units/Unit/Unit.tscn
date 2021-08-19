@@ -53,7 +53,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StatusBar" type="ProgressBar" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="."]
 margin_left = -24.0
 margin_top = 16.0
 margin_right = 24.0

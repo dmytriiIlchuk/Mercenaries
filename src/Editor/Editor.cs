@@ -68,7 +68,7 @@ public class Editor : Node2D
     public void _on_CreateUnit_item_selected(int id)
     {
         this.action = (Vector2 position) => {
-            Unit unit = GameObjectFactory.MakeUnit(world, position, UnitConfig.Default);
+            Unit unit = (Unit)GameObjectFactory.MakeObject(UnitConfig.Default, world, position);
             unit.Connect("UnitInput", this, nameof(OnUnitInput));
         };
     }

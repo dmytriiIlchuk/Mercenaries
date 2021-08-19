@@ -34,6 +34,7 @@
             public static string ConstructionsPath = $"{BasePath}/Constructions";
             public static string ResourcesPath = $"{BasePath}/Resources";
             public static string StonePath = $"{BasePath}/Unit";
+            public static string BuildingScenePath = $"{ConstructionsPath}/Building/Building.tscn";
         }
 
         public class Main

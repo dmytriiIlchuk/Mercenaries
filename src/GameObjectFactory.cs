@@ -1,53 +1,45 @@
 ﻿using Godot;
-using System;
 
 class GameObjectFactory
 {
-    public static GameObject MakeObject(Node2D parent, Vector2 position, GameObjectConfig config)
+    public static GameObject MakeObject(GameObjectConfig config, Node2D parent, Vector2 position)
     {
-        GameObject instance = MakeObject(position, config);
+        GameObject instance = MakeObject(config);
 
         parent.AddChild(instance);
+        instance.Position = position;
 
         return instance;
     }
 
-    public static GameObject MakeObject(Vector2 position, GameObjectConfig config)
+    public static GameObject MakeObject(GameObjectConfig config)
     {
-        GameObject instance;
-        switch (config.ObjectType)
-        {
-            case GameObjectType.Unit:
-                instance = MakeUnit(position, (UnitConfig)config);
-                break;
-            case GameObjectType.Formation:
-                instance = MakeFormation(position, (UnitConfig)config);
-                break;
-            default:
-                throw new NotImplementedException();
-        }
+        PackedScene scene = GD.Load<PackedScene>(config.ScenePath);
+        GameObject instance = (GameObject)scene.Instance();
+
+        instance.Initialize(config);
 
         return instance;
     }
 
-    public static Unit MakeUnit(Vector2 position, UnitConfig config)
+    public static GameObject MakeUnit(Vector2 position, UnitConfig config)
     {
-        var unitScene = GD.Load<PackedScene>(ResourcePath.Models.Units.UnitScenePath);
+        var unitScene = GD.Load<PackedScene>(config.ScenePath);
 
         Unit instance = (Unit)unitScene.Instance();
         instance.Position = position;
-        switch (config.unitType)
+        switch (config.UnitType)
         {
             case UnitType.Worker:
-                instance.UnitLabel = nameof(UnitType.Worker);
+                instance.Label = nameof(UnitType.Worker);
                 instance.AddToGroup("workers");
                 break;
             case UnitType.Archer:
-                instance.UnitLabel = nameof(UnitType.Archer);
+                instance.Label = nameof(UnitType.Archer);
                 instance.AddToGroup("warriors");
                 break;
             case UnitType.Swordsman:
-                instance.UnitLabel = nameof(UnitType.Swordsman);
+                instance.Label = nameof(UnitType.Swordsman);
                 instance.AddToGroup("warriors");
                 break;
         }

@@ -14,4 +14,6 @@ public class GameObjectConfig
     public string Name;
 
     public GameObjectType ObjectType;
+
+    public string ScenePath;
 }

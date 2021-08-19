@@ -5,11 +5,15 @@ public class UnitConfig: GameObjectConfig
     {
         Attack = 10.0f,
         HealthPointsMax = 100.0f,
-        unitType = UnitType.Swordsman,
-        BodySize = new System.Tuple<int, int>(3,3),
-        Name = "ff",
+        UnitType = UnitType.Swordsman,
+        BodySize = new System.Tuple<int, int>(3, 3),
+        Name = "Pleb",
         ObjectType = GameObjectType.Unit,
-        Speed = 10.0f
+        Speed = 10.0f,
+        ScenePath = ResourcePath.Models.Units.UnitScenePath,
+        Groups = new string[] {
+            "Workers"
+        }
     };
 
     /// <summary>
@@ -21,5 +25,7 @@ public class UnitConfig: GameObjectConfig
 
     public float Attack;
 
-    public UnitType unitType;
+    public UnitType UnitType;
+
+    public string[] Groups;
 }
