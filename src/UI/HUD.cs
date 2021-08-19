@@ -3,7 +3,7 @@ using Godot;
 public class HUD : CanvasLayer
 {
     [Signal]
-    public delegate void ConstructBuildingSignal(Building building);
+    public delegate void MouseClick();
 
     public override void _Ready()
     {
@@ -18,17 +18,24 @@ public class HUD : CanvasLayer
 
     public void OnIdPressed(int id)
     {
-        foreach (Unit unit in this.GetTree().GetNodesInGroup("Workers"))
-        {
-            if (!unit.IsConnected(nameof(ConstructBuildingSignal), unit, nameof(unit.onConstructBuildingSignal)))
-            {
-                this.Connect(nameof(ConstructBuildingSignal), unit, nameof(unit.onConstructBuildingSignal));
-            }
-        };
         World world = this.GetTree().Root.GetNode<World>("Main/World");
 
-        Building house = (Building)GameObjectFactory.MakeObject(BuildingConfig.Default, world, new Vector2(0f, 0f));
+        Building building = (Building)GameObjectFactory.MakeObject(BuildingConfig.Default, world, new Vector2(0f, 0f));
 
-        EmitSignal("ConstructBuildingSignal", house);
+        this.Connect(nameof(MouseClick), building, nameof(building.OnBuildingPlaced));
     }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton eventMouseButton)
+        {
+            switch ((ButtonList)eventMouseButton.ButtonIndex)
+            {
+                case ButtonList.Left:
+                    EmitSignal(nameof(MouseClick));
+                    break;
+            }
+        }
+    }
+
 }

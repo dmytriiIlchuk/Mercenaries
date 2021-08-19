@@ -11,7 +11,7 @@ public class ConstructBuildingTask<T> : Task<T> where T : Node2D
 
     public override bool Achieved(T performer)
     {
-        return building.Completed;
+        return building.IsCompleted();
     }
 
     public override void Action(T performer, float delta)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://src/Models/Buildings/Constructions/Building/House.cs" type="Script" id=1]
+[ext_resource path="res://src/Models/Buildings/Constructions/Building.cs" type="Script" id=1]
 [ext_resource path="res://assets/sprites/misc/unit_body.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]

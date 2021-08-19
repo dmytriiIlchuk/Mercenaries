@@ -31,11 +31,6 @@ public class Unit : GameObject, IMoving, IPersistant, IHittable, IAttacking, ISe
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        this.healthBar = this.GetNode<ProgressBar>("HealthBar");
-        this.progressBar = this.GetNode<ProgressBar>("ProgressBar");
-        this.body = this.GetNode<CollisionObject2D>("Body");
-        string name = nameof(OnInput);
-        this.body.Connect("input_event", this, name);
     }
 
     public void onConstructBuildingSignal(Building building)
@@ -167,6 +162,12 @@ public class Unit : GameObject, IMoving, IPersistant, IHittable, IAttacking, ISe
 
     public override void Initialize(GameObjectConfig gameObjectConfig)
     {
+        this.healthBar = this.GetNode<ProgressBar>("HealthBar");
+        this.progressBar = this.GetNode<ProgressBar>("ProgressBar");
+        this.body = this.GetNode<CollisionObject2D>("Body");
+        string name = nameof(OnInput);
+        this.body.Connect("input_event", this, name);
+
         UnitConfig config = (UnitConfig)gameObjectConfig;
         this._label = config.Name;
         foreach (string group in config.Groups)

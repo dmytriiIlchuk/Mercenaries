@@ -2,7 +2,40 @@
 
 public class Building : GameObject
 {
-    public bool Completed { get; private set; }
+    [Signal]
+    public delegate void ConstructBuildingSignal(Building building);
+
+    private enum BuildingState
+    {
+        Blueprint,
+        Placed,
+        Completed
+    }
+
+    private BuildingState _state;
+
+    private BuildingState State
+    {
+        get => this._state;
+        set
+        {
+            this._state = value;
+            switch (value)
+            {
+                case BuildingState.Blueprint:
+                    this.Modulate = Colors.Blue;
+                    break;
+                case BuildingState.Placed:
+                    this.Modulate = Colors.Red;
+                    this._labelNode.Visible = false;
+                    break;
+                case BuildingState.Completed:
+                    this.Modulate = Colors.White;
+                    this._labelNode.Visible = true;
+                    break;
+            }
+        }
+    }
 
     public int ConstructionPoints { get; private set; }
 
@@ -18,7 +51,7 @@ public class Building : GameObject
             if (this._constructionProgress >= ConstructionPoints)
             {
                 this._constructionProgress = ConstructionPoints;
-                this.Completed = true;
+                this.State = BuildingState.Completed;
                 this.progressBar.Visible = false;
                 _labelNode.Visible = true;
             }
@@ -43,13 +76,20 @@ public class Building : GameObject
     public override void _Ready()
     {
         base._Ready();
-        this.Modulate = Colors.Yellow;
+    }
+
+    public override void _Process(float delta)
+    {
+        if (State == BuildingState.Blueprint)
+        {
+            this.Position = GetGlobalMousePosition();
+        }
     }
 
     public void Construct(int constructionPoints)
     {
         this.ConstructionProgress += constructionPoints;
-        if (this.Completed)
+        if (this.IsCompleted())
         {
             this.Modulate = Colors.White;
         }
@@ -63,8 +103,39 @@ public class Building : GameObject
 
         // Config
         BuildingConfig config = (BuildingConfig)gameObjectConfig;
-        this.ConstructionPoints= config.ConstructionPoints;
+        this.ConstructionPoints = config.ConstructionPoints;
         this.Label = gameObjectConfig.Name;
         this.ConstructionProgress = 0;
+        this.State = BuildingState.Blueprint;
+    }
+
+    public void OnBuildingPlaced()
+    {
+        if (this.State == BuildingState.Blueprint)
+        {
+            this.State = BuildingState.Placed;
+
+            this.Modulate = Colors.Red;
+
+            foreach (Unit unit in this.GetTree().GetNodesInGroup("Workers"))
+            {
+                if (!unit.IsConnected(nameof(ConstructBuildingSignal), unit, nameof(unit.onConstructBuildingSignal)))
+                {
+                    this.Connect(nameof(ConstructBuildingSignal), unit, nameof(unit.onConstructBuildingSignal));
+                }
+            };
+
+            EmitSignal("ConstructBuildingSignal", this);
+        }
+    }
+
+    public bool IsCompleted()
+    {
+        return this.State == BuildingState.Completed;
+    }
+
+    public bool IsPlaced()
+    {
+        return this.State == BuildingState.Placed;
     }
 }
